@@ -2,6 +2,9 @@ package com.example.artbooktesting.dependencyinjection
 
 import android.content.Context
 import androidx.room.Room
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.artbooktesting.R
 import com.example.artbooktesting.api.RetroFitApi
 import com.example.artbooktesting.roomdb.ArtDatabase
 import com.example.artbooktesting.util.Util.BASE_URL
@@ -38,4 +41,12 @@ object AppModule {
             .build()
             .create(RetroFitApi::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun injectGlide(@ApplicationContext context: Context) = Glide.with(context)
+        .setDefaultRequestOptions(
+            RequestOptions().placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_foreground)
+        )
 }
