@@ -6,6 +6,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.artbooktesting.R
 import com.example.artbooktesting.api.RetroFitApi
+import com.example.artbooktesting.repo.ArtRepository
+import com.example.artbooktesting.repo.ArtRepositoryInterface
+import com.example.artbooktesting.roomdb.ArtDAO
 import com.example.artbooktesting.roomdb.ArtDatabase
 import com.example.artbooktesting.util.Util.BASE_URL
 import dagger.Module
@@ -41,6 +44,10 @@ object AppModule {
             .build()
             .create(RetroFitApi::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun injectNormalRepo(dao : ArtDAO, api: RetroFitApi) = ArtRepository(dao,api) as ArtRepositoryInterface
 
     @Singleton
     @Provides
