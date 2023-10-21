@@ -7,15 +7,13 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.bumptech.glide.RequestManager
 import com.example.artbooktesting.R
-import com.example.artbooktesting.roomdb.Art
 import javax.inject.Inject
 
-class ImageRecyclerAdapter @Inject constructor(
+class ImageApiAdapter@Inject constructor(
     val glide : RequestManager
-) : RecyclerView.Adapter<ImageRecyclerAdapter.ImageViewHolder>() {
+) : RecyclerView.Adapter<ImageApiAdapter.ImageViewHolder>() {
 
     private var onItemClickListener : ((String) -> Unit)? = null
     class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -36,29 +34,32 @@ class ImageRecyclerAdapter @Inject constructor(
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ImageApiAdapter.ImageViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.image_row, parent, false)
-        return ImageViewHolder(view)
+        return ImageApiAdapter.ImageViewHolder(view)
+    }
+
+    fun setOnClickListener(listener : (String) -> Unit) {
+        onItemClickListener = listener
     }
 
     override fun getItemCount(): Int {
         return images.size
     }
 
-    /*fun setOnItemClickListener(listener: (String) -> Unit) {
-        onItemClickListener = listener
-    }*/
-
-    override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ImageApiAdapter.ImageViewHolder, position: Int) {
         val imageView = holder.itemView.findViewById<ImageView>(R.id.singleArtImageView)
         val url = images[position]
         holder.itemView.apply {
-          glide.load(url).into(imageView)
+            glide.load(url).into(imageView)
             setOnClickListener {
                 onItemClickListener?.let {
                     it(url)
                 }
             }
         }
-        }
+    }
 }
