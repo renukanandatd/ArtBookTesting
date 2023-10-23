@@ -4,11 +4,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.bumptech.glide.RequestManager
 import com.example.artbooktesting.adapter.ArtRecyclerAdapter
+import com.example.artbooktesting.adapter.ImageApiAdapter
 import javax.inject.Inject
 
 class ArtFragmentFactory @Inject constructor(
     private val artRecyclerAdapter: ArtRecyclerAdapter,
-    private val imageRecyclerAdapter: ArtRecyclerAdapter,
+    private val imageRecyclerAdapter: ImageApiAdapter,
     private val glide:RequestManager
 ) : FragmentFactory(){
 
