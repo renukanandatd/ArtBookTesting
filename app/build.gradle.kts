@@ -20,7 +20,8 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        //testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.artbooktesting.HiltTestRunner"
 
         ksp {
             arg("room.schemaLocation", "$projectDir/schemas")
@@ -59,6 +60,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.test:runner:1.5.2")
     androidTestImplementation ("androidx.test.ext:junit:1.1.5")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
 
@@ -101,6 +103,9 @@ dependencies {
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
     testImplementation ("com.google.truth:truth:1.1.3")
     testImplementation ("org.mockito:mockito-core:4.7.0")
+
+    implementation ("com.google.dagger:hilt-android-testing:2.43.2")
+    kaptAndroidTest ("com.google.dagger:hilt-android-compiler:2.4.2")
 
     // Android Test Implementations
     androidTestImplementation ("junit:junit:4.13.2")
